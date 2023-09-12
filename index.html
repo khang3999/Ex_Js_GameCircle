@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Login</title>
+    <link rel="stylesheet" href="public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="public/css/styles.css">
+
+    
+</head>
+
+<body>
+    <button id="start">Start</button>
+    <h3 class="result">0</h3>
+    <div class="wrap-div d-flex">
+        <div class="blue circle">5</div>
+        <div class="blue circle">5</div>
+        <div class="green circle">2</div>
+        <div class="green circle ">2</div>
+        <div class="red circle ">10</div>
+        <div class="red circle ">10</div>
+        <div class="orange circle ">1</div>
+        <div class="orange circle ">1</div>
+        <div class="black circle ">0</div>
+        <div class="black circle ">0</div>
+    </div>
+    <script>
+        const btnStart = document.querySelector('#start');
+        const arrlight = document.querySelectorAll('.circle');
+        const arr = document.querySelectorAll('.circle');
+        const rs = document.querySelector('.result');
+        const wrap = document.querySelector('.wrap-div');
+        let totalScore = 0;
+        let a;
+        let gameTO;
+        
+        btnStart.addEventListener('click', function () {
+            wrap.classList.add('wrap');
+            a = setTimeout(function setPosition() {
+                arr.forEach(element => {
+                    element.style.left = Math.floor(Math.random() * 1151) + 'px';
+                    element.style.top = Math.floor(Math.random() * 451) + 'px';
+                })
+                a = setTimeout(setPosition, 1000);
+            }, 1000);
+
+            // Cong diem
+            arrlight.forEach(element => {
+                element.onclick = function () {
+                    totalScore += +element.textContent;
+                    rs.textContent = totalScore;
+                }
+            });
+
+            gameTO = setTimeout(function () {
+                clearTimeout(a);
+                alert("Time out!" + totalScore);
+                wrap.classList.remove('wrap');
+            }, 5000)
+        })     
+    </script>
+</body>
+
+</html>
